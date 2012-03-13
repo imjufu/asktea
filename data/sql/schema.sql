@@ -1,7 +1,7 @@
 -- #######
 -- ## Question table
 -- #######
-DROP TABLE Question;
+DROP TABLE IF EXISTS Question;
 
 CREATE TABLE IF NOT EXISTS Question (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS Question (
 -- #######
 -- ## Answer table
 -- #######
-DROP TABLE Comment;
+DROP TABLE IF EXISTS Comment;
 
 CREATE TABLE IF NOT EXISTS Comment (
   id INTEGER PRIMARY KEY AUTOINCREMENT ,
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS Comment (
 -- #######
 -- ##  Vote table
 -- #######
-DROP TABLE Vote;
+DROP TABLE IF EXISTS Vote;
 
 CREATE TABLE IF NOT EXISTS Vote (
 	id INTEGER PRIMARY KEY NOT NULL,
