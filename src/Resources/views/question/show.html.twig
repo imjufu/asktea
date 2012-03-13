@@ -5,12 +5,14 @@
 {% endblock %}
 
 {% block content %}
+	<blockquote>{{ question.author }}</blockquote>
 	<p>{{ question.body }}</p>
 	<p>Nombre de votes : {{ question.nb_vote }}</p>
 
 	<div>
 		{% for comment in comments %}
 			<p>{{ comment.body }}</p>
+			<blockquote>{{ comment.author }}</blockquote>
 		{% endfor %}
 	</div>
 {% endblock %}
