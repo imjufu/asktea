@@ -83,4 +83,34 @@ class Question extends BaseQuestion
         
         return $result;
     }
+
+    public function findAllOrderedByNbVote()
+    {
+        $sql = sprintf("
+            SELECT q.id, q.author, q.title, q.body, q.creation_date, COUNT(v.id) AS nb_vote
+            FROM %s AS q
+            LEFT JOIN %s AS v
+                ON q.id = v.question_id
+            GROUP BY q.id
+            ORDER BY nb_vote DESC",
+            self::getSqlName(),
+            Vote::getSqlName()
+        );
+        $aData = $this->connection->fetchAll($sql);
+        
+        $result = array();
+        foreach ($aData as $data)
+        {
+            $result[$data['id']] = array(
+                'id' => $data['id'],
+                'author' => $data['author'],
+                'title' => $data['title'],
+                'body' => $data['body'],
+                'creation_date' => $data['creation_date'],
+                'nb_vote' => $data['nb_vote'],
+            );
+        }
+        
+        return $result;
+    }
 }
