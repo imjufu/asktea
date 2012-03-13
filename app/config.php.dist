@@ -1,0 +1,10 @@
+<?php
+
+$app['debug'] = true;
+
+// Sqlite
+$app['db.options'] = array(
+    'driver' => 'pdo_sqlite',
+    'path' => __DIR__.'/../cache/app.db',
+);
+
