@@ -9,6 +9,7 @@
 		<blockquote>{{ question.author }}</blockquote>
 		<p>{{ question.body }}</p>
 		<p>Nombre de votes : {{ question.nb_vote }}</p>
+		<p><a class="btn btn-primary btn-large" href="{{ path('vote.new', {question_id: question.id}) }}">Voter pour cette question</a></p>
 	</div>
 	<div>
 		{% for comment in comments %}
