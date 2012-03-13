@@ -3,8 +3,8 @@
 -- #######
 DELETE FROM Question;
 
-INSERT INTO "Question" VALUES(1,'mrandy', 'Est-ce une blague ?','Est-ce que vous pensez réussir ?','2012-03-13');
-INSERT INTO "Question" VALUES(2,'jfusco','Comment acheter','Je veux acheter chez vous','2012-03-13');
+INSERT INTO "Question" VALUES(1,'mrandy', 'Quand pourrons nous acheter ?','Quels sont vos délais de lancement de service ?','2012-03-13');
+INSERT INTO "Question" VALUES(2,'jfusco','Comment acheter ?','Je veux acheter chez vous','2012-03-13');
 INSERT INTO "Question" VALUES(3,'edaspet', 'Est-ce que tout sera open source ?','Est-ce que tout sera open-source ?','2012-03-13');
 
 -- #######
