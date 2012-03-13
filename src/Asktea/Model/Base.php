@@ -11,6 +11,7 @@ abstract class Base
 	abstract protected function isNew();
 	abstract protected function insert();
 	abstract protected function update();
+    abstract static public function getSqlName();
 
 	public function __construct(Connection $connection)
 	{

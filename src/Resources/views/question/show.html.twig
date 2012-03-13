@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+	<h1>{{ question.title }}</h1>
+{% endblock %}
+
+{% block content %}
+	<p>{{ question.body }}</p>
+	<p>Nombre de votes : {{ question.nb_vote }}</p>
+
+	<div>
+		{% for comment in comments %}
+			<p>{{ comment.body }}</p>
+		{% endfor %}
+	</div>
+{% endblock %}

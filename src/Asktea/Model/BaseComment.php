@@ -2,11 +2,11 @@
 
 namespace Asktea\Model;
 
-abstract class BaseAnswer extends Base
+abstract class BaseComment extends Base
 {
     protected
         $id,
-        $value;
+        $body;
 
     public function isNew()
     {
@@ -15,8 +15,8 @@ abstract class BaseAnswer extends Base
 
     protected function insert()
     {
-        $stmt = $this->connection->insert('Answer', array(
-            'value' => $this->value,
+        $stmt = $this->connection->insert(self::getSqlName(), array(
+            'body' => $this->body,
         ));
         
         $this->id = $this->connection->lastInsertId();
@@ -26,8 +26,13 @@ abstract class BaseAnswer extends Base
 
     protected function update()
     {
-        return $this->connection->update('Answer', array(
-            'value' => $this->value,
+        return $this->connection->update(self::getSqlName(), array(
+            'body' => $this->body,
         ), array('id' => $this->id));
+    }
+
+    static public function getSqlName()
+    {
+        return 'Comment';
     }
 }
