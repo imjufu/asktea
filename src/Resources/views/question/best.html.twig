@@ -1,0 +1,9 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+<h1>Les questions avec le plus de votes</h1>
+{% endblock %}
+
+{% block content %}
+  {% include "question/_list.html.twig" with { 'questions': questions } %}
+{% endblock %}

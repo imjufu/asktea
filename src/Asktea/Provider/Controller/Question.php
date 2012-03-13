@@ -17,6 +17,21 @@ class Question implements ControllerProviderInterface
         $controllers = new ControllerCollection();
         
         // *******
+        // **
+        // *******
+        $controllers->get('best.html', function() use ($app)
+        {
+            $app['session']->set('menu', 'question.best');
+
+            $oQuestion = new Model\Question($app['db']);
+
+            $questions = $oQuestion->findAllOrderedByNbVote();
+
+            return $app['twig']->render('question/best.html.twig', array('questions' => $questions));
+        })
+        ->bind('question.best');
+
+        // *******
         // ** Question show
         // *******
         $controllers->get('{id}.html', function($id) use ($app)
