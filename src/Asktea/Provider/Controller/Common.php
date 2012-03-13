@@ -19,6 +19,13 @@ class Common implements ControllerProviderInterface
         // *******
         $controllers->get('/', function(Request $request) use ($app)
         {
+            $oQuestion = new \Asktea\Model\Question($app['db']);
+
+            $oQuestion->value = 'How are you ?';
+            $oQuestion->save();
+
+            die;
+
         	return $app['twig']->render('common/homepage.html.twig');
         });
 

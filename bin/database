@@ -1,0 +1,30 @@
+#!/usr/bin/env php
+<?php
+
+$rootDir = dirname(__DIR__);
+$databaseDir = $rootDir.'/cache';
+
+array_shift($argv);
+if (!isset($argv[0])) {
+    exit(<<<EOF
+SQLite Database script management.
+
+Specify a command to run:
+
+install: initialize database (recommended)
+
+
+EOF
+    );
+}
+
+if (!in_array($command = array_shift($argv), array('install'))) {
+    exit(sprintf("Command \"%s\" does not exist.\n", $command));
+}
+
+if (!is_dir($databaseDir)) {
+    mkdir($databaseDir, 0777, true);
+}
+
+$db = new SQLite3($databaseDir.'/asktea.db');
+$db->exec(file_get_contents($rootDir.'/data/sql/schema.sql'));
