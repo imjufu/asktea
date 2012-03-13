@@ -11,8 +11,8 @@ class Question extends BaseQuestion
             $id = array($id);
         }
 
-        $sql = sprintf("SELECT q.id, q.title, q.body, q.creation_date FROM %s AS q", self::getSqlName());
-        return $this->connection->fetchAssoc($sql);
+        $sql = sprintf("SELECT q.id, q.title, q.body, q.creation_date FROM %s AS q WHERE q.id = ?", self::getSqlName());
+        return $this->connection->fetchAssoc($sql, $id);
     }
 
     public function findWithNbVote($id)
@@ -25,12 +25,13 @@ class Question extends BaseQuestion
         $sql = sprintf("
         	SELECT q.id, q.title, q.body, q.creation_date, COUNT(v.id) AS nb_vote
         	FROM %s AS q
-        	JOIN %s AS v ON q.id = v.question_id
+        	LEFT JOIN %s AS v ON q.id = v.question_id
+            WHERE q.id = ?
         	GROUP BY q.id", 
         	self::getSqlName(),
         	Vote::getSqlName()
         );
-        return $this->connection->fetchAssoc($sql);
+        return $this->connection->fetchAssoc($sql, $id);
     }
 
     public function findAll()
