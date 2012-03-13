@@ -4,7 +4,7 @@ Application de dépot et de vote sur questions
 
 ## TODO
 
-* Déposer des commentaires
+* Déposer des commentaires (réservé aux admins)
 * Voter
 	* Depuis la homepage
 	* Depuis la fiche
