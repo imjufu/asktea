@@ -1,7 +1,3 @@
-    id INTEGER PRIMARY KEY NOT NULL,
-    question_id INTEGER NOT NULL,
-    ip VARCHAR(255) NOT NULL,
-    creation_date DATETIME NOT NULL
 <?php
 
 namespace Asktea\Model;
