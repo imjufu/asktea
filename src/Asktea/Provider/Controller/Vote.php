@@ -23,10 +23,17 @@ class Vote implements ControllerProviderInterface
             $oQuestion = new Model\Question($app['db']);
             $oVote = new Model\Vote($app['db']);
 
+            // Check that question exists
             $question = $oQuestion->find($question_id);
             if( !$question )
             {
                 return $app->abort(404, 'This question does not exists');
+            }
+
+            // Is this Ip have already voted
+            if( $oVote->haveIpAlreadyVoted($question['id'], $request->getClientIp()) )
+            {
+                return $app['twig']->render('vote/alreadyVote.html.twig');
             }
 
             $oVote->question_id = $question['id'];
