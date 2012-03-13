@@ -10,7 +10,7 @@
       <h2>{{ question.title }}</h2>
       <p>{{ question.body }}</p>
       <p>Nombre de votes : {{ question.nb_vote }}</p>
-      <p><a class="btn btn-primary btn-large" href="{{ path('question_show', {id: question.id}) }}">Learn more &raquo;</a></p>
+      <p><a class="btn btn-primary btn-large" href="{{ path('question.show', {id: question.id}) }}">Learn more &raquo;</a></p>
     </div>
   {% endfor %}
 {% endblock %}

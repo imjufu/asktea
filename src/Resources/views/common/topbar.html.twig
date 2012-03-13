@@ -12,7 +12,7 @@
         <ul class="nav">
 
           <li class="{% if app.session.get('menu') == 'homepage' %}active{% endif %}"><a href="{{ path('homepage') }}">Liste des questions</a></li>
-          <li class="{% if app.session.get('menu') == 'question.new' %}active{% endif %}"><a href="{{ path('question_new') }}">Poser une nouvelle question</a></li>
+          <li class="{% if app.session.get('menu') == 'question.new' %}active{% endif %}"><a href="{{ path('question.new') }}">Poser une nouvelle question</a></li>
         </ul>
         </ul>
       </div><!--/.nav-collapse -->

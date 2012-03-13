@@ -35,7 +35,7 @@ class Question implements ControllerProviderInterface
             return $app['twig']->render('question/show.html.twig', array('question' => $question, 'comments' => $comments));
         })
         ->assert('id', '\d+')
-        ->bind('question_show');
+        ->bind('question.show');
 
         // *******
         // ** Question creation form
@@ -44,7 +44,7 @@ class Question implements ControllerProviderInterface
         {
             return $app['twig']->render('question/new.html.twig');
         })
-        ->bind('question_new');
+        ->bind('question.create');
 
         return $controllers;
     }
