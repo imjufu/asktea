@@ -2,6 +2,9 @@
 
 $app['debug'] = false;
 
+// By default, all page are under "Homepage" menu
+$app['session']->set('menu', 'homepage');
+
 // Sqlite
 $app['db.options'] = array(
     'driver' => 'pdo_sqlite',

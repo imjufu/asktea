@@ -7,7 +7,7 @@ class Comment extends BaseComment
 	public function getForQuestion($question_id)
 	{
 		$sql = sprintf("
-			SELECT id, body, creation_date 
+			SELECT id, author, body, creation_date 
 			FROM %s 
 			WHERE question_id = ?
 			ORDER BY creation_date ASC", self::getSqlName());
@@ -17,6 +17,7 @@ class Comment extends BaseComment
 		foreach( $aData as $data )
 		{
 			$result[$data['id']] = array(
+                'author' => $data['author'],
 				'body' => $data['body'],
 				'creation_date' => $data['creation_date'],
 			);

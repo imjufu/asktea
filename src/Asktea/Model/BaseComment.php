@@ -6,6 +6,7 @@ abstract class BaseComment extends Base
 {
     protected
         $id,
+        $author,
         $body;
 
     public function isNew()
@@ -16,6 +17,7 @@ abstract class BaseComment extends Base
     protected function insert()
     {
         $stmt = $this->connection->insert(self::getSqlName(), array(
+            'author' => $this->author,
             'body' => $this->body,
         ));
         
@@ -27,6 +29,7 @@ abstract class BaseComment extends Base
     protected function update()
     {
         return $this->connection->update(self::getSqlName(), array(
+            'author' => $this->author,
             'body' => $this->body,
         ), array('id' => $this->id));
     }
