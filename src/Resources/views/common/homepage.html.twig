@@ -5,16 +5,5 @@
 {% endblock %}
 
 {% block content %}
-  {% for question in questions %}
-    <div class="hero-unit">
-      <h2>{{ question.title }}</h2>
-      <blockquote>{{ question.author }}</blockquote>
-      <p>{{ question.body }}</p>
-      <p>Nombre de votes : {{ question.nb_vote }}</p>
-      <p>
-      	<a class="btn btn-primary btn-large" href="{{ path('vote.new', {question_id: question.id}) }}">Voter</a>
-      	<a class="btn btn-primary btn-large" href="{{ path('question.show', {id: question.id}) }}">Détail &raquo;</a>
-      </p>
-    </div>
-  {% endfor %}
+  {% include "question/_list.html.twig" with { 'questions': questions } %}
 {% endblock %}
