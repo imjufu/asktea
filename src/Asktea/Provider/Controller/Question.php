@@ -2,7 +2,8 @@
 
 namespace Asktea\Provider\Controller;
 
-use Asktea\Model as Model;
+use Asktea\Model;
+use Asktea\Form;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Silex\ControllerCollection;
@@ -24,8 +25,8 @@ class Question implements ControllerProviderInterface
             $oComment   = new Model\Comment($app['db']);
 
             $question = $oQuestion->findWithNbVote($id);
-
-            if( is_null($question) )
+            
+            if( !$question )
             {
                 $app->abort(404, 'Cette question n\'existe pas');
             }
@@ -38,13 +39,41 @@ class Question implements ControllerProviderInterface
         ->bind('question.show');
 
         // *******
-        // ** Question creation form
+        // ** Question creation
         // *******
-        $controllers->get('new.html', function() use ($app)
+        $controllers->match('new.html', function(Request $request) use ($app)
         {
-            return $app['twig']->render('question/new.html.twig');
+            $app['session']->set('menu', 'question.new');
+
+            $form = $app['form.factory']->create(new Form\QuestionType());
+
+            if( $request->getMethod() == 'POST' )
+            {
+                $form->bindRequest($request);
+                if( $form->isValid() )
+                {
+                    $data = $form->getData();
+
+                    // Save question into database
+                    $oQuestion = new Model\Question($app['db']);
+                    $oQuestion->title = $data['title'];
+                    $oQuestion->body = $data['body'];
+                    $oQuestion->save();
+
+                    // Redirect on question show page
+                    return $app->redirect(
+                        $app['url_generator']->generate(
+                            'question.show', 
+                            array('id' => $oQuestion->id)
+                        )
+                    );
+                }
+            }
+
+            return $app['twig']->render('question/new.html.twig', array('form' => $form->createView()));
         })
-        ->bind('question.create');
+        ->method('GET|POST')
+        ->bind('question.new');
 
         return $controllers;
     }
