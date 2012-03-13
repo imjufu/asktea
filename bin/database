@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-$rootDir = dirname(__DIR__);
+$rootDir = realpath(__DIR__.'/../');
 $databaseDir = $rootDir.'/cache';
 
 array_shift($argv);
