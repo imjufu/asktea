@@ -10,6 +10,13 @@
 		<form method="post" action="{{ url('question.new') }}" class="form-horizontal" {{ form_enctype(form) }}>
 			<fieldset>
 				<legend>Poser une question</legend>
+				<div class="control-group {% if form.author.vars.errors|length %}error{% endif %}">
+					{{ form_label(form.author, null, { 'attr': { 'class': 'control-label'} }) }}
+					<div class="controls">
+						{{ form_widget(form.author) }}
+						{{ form_errors(form.author) }}
+					</div>
+				</div>
 			    <div class="control-group {% if form.title.vars.errors|length %}error{% endif %}">
 				    {{ form_label(form.title, null, { 'attr': {'class': 'control-label'} }) }}
 				    <div class="controls">

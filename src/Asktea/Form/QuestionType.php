@@ -13,6 +13,7 @@ class QuestionType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
+            ->add('author', 'text')
             ->add('title', 'text')
             ->add('body', 'textarea');
     }
@@ -22,6 +23,9 @@ class QuestionType extends AbstractType
         // Collection Constraint
         $collectionConstraint = new Constraints\Collection(array(
             'fields' => array(
+                'author' => array(
+                    new Constraints\NotNull(),
+                    new Constraints\MaxLength(array('limit' => 255))),
                 'title' => array(
                     new Constraints\NotNull(),
                     new Constraints\MaxLength(array('limit' => 255))),

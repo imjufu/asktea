@@ -56,6 +56,7 @@ class Question implements ControllerProviderInterface
 
                     // Save question into database
                     $oQuestion = new Model\Question($app['db']);
+                    $oQuestion->author = $data['author'];
                     $oQuestion->title = $data['title'];
                     $oQuestion->body = $data['body'];
                     $oQuestion->save();
