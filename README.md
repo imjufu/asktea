@@ -4,7 +4,9 @@ Application de dépot et de vote sur questions
 
 ## TODO
 
-* Déposer des commentaires
+* Questions
+	* Mettre en place un pager
+* Déposer des commentaires (réservé aux admins)
+	* Mettre en place une petite protection
 * Voter
-	* Depuis la homepage
-	* Depuis la fiche
+	* Remplacer vote statique par AJAX
