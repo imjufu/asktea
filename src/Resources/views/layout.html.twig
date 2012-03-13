@@ -27,6 +27,7 @@
   <body>
     {% include 'common/topbar.html.twig' %}
     <div class="container">
+      {% block title %}{% endblock %}
       {% block content %}{% endblock %}
       <hr>
       {% include 'common/footer.html.twig' %}

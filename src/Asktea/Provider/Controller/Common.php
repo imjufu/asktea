@@ -2,6 +2,7 @@
 
 namespace Asktea\Provider\Controller;
 
+use Asktea\Model\Question;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Silex\ControllerCollection;
@@ -19,15 +20,13 @@ class Common implements ControllerProviderInterface
         // *******
         $controllers->get('/', function(Request $request) use ($app)
         {
-            $oQuestion = new \Asktea\Model\Question($app['db']);
+            $oQuestion = new Question($app['db']);
 
-            $oQuestion->value = 'How are you ?';
-            $oQuestion->save();
+            $questions = $oQuestion->findAllWithNbVote();
 
-            die;
-
-        	return $app['twig']->render('common/homepage.html.twig');
-        });
+            return $app['twig']->render('common/homepage.html.twig', array('questions' => $questions));
+        })
+        ->bind('homepage');
 
         return $controllers;
     }

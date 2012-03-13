@@ -2,6 +2,7 @@
 
 namespace Asktea\Model;
 
-class Answer extends BaseAnswer
+class Vote extends BaseVote
 {
+	
 }

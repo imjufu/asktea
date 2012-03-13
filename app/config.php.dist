@@ -1,10 +1,10 @@
 <?php
 
-$app['debug'] = true;
+$app['debug'] = false;
 
 // Sqlite
 $app['db.options'] = array(
     'driver' => 'pdo_sqlite',
-    'path' => __DIR__.'/../cache/app.db',
+    'path' => __DIR__.'/../cache/asktea.db',
 );
 

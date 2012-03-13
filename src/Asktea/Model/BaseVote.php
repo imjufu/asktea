@@ -2,12 +2,12 @@
 
 namespace Asktea\Model;
 
-abstract class BaseQuestion extends Base
+abstract class BaseVote extends Base
 {
     protected
         $id,
-        $title,
-        $body,
+        $question_id,
+        $ip,
         $creation_date;
 
     public function isNew()
@@ -18,8 +18,8 @@ abstract class BaseQuestion extends Base
     protected function insert()
     {
         $stmt = $this->connection->insert(self::getSqlName(), array(
-            'title' => $this->title,
-            'body' => $this->body,
+            'question_id' => $this->question_id,
+            'ip' => $this->ip,
             'creation_date' => date('c'),
         ));
         
@@ -31,13 +31,13 @@ abstract class BaseQuestion extends Base
     protected function update()
     {
         return $this->connection->update(self::getSqlName(), array(
-            'title' => $this->title,
-            'body' => $this->body,
+            'question_id' => $this->question_id,
+            'ip' => $this->ip,
         ), array('id' => $this->id));
     }
 
     static public function getSqlName()
     {
-        return 'Question';
+        return 'Vote';
     }
 }
