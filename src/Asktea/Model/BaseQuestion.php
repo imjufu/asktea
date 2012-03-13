@@ -6,6 +6,7 @@ abstract class BaseQuestion extends Base
 {
     protected
         $id,
+        $author,
         $title,
         $body,
         $creation_date;
@@ -18,6 +19,7 @@ abstract class BaseQuestion extends Base
     protected function insert()
     {
         $stmt = $this->connection->insert(self::getSqlName(), array(
+            'author' => $this->author,
             'title' => $this->title,
             'body' => $this->body,
             'creation_date' => date('c'),
@@ -31,6 +33,7 @@ abstract class BaseQuestion extends Base
     protected function update()
     {
         return $this->connection->update(self::getSqlName(), array(
+            'author' => $this->author,
             'title' => $this->title,
             'body' => $this->body,
         ), array('id' => $this->id));

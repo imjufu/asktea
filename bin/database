@@ -28,3 +28,4 @@ if (!is_dir($databaseDir)) {
 
 $db = new SQLite3($databaseDir.'/asktea.db');
 $db->exec(file_get_contents($rootDir.'/data/sql/schema.sql'));
+$db->exec(file_get_contents($rootDir.'/data/sql/data.sql'));
