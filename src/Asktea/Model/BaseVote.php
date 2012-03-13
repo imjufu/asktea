@@ -1,12 +1,18 @@
+    id INTEGER PRIMARY KEY NOT NULL,
+    question_id INTEGER NOT NULL,
+    ip VARCHAR(255) NOT NULL,
+    creation_date DATETIME NOT NULL
 <?php
 
 namespace Asktea\Model;
 
-abstract class BaseQuestion extends Base
+abstract class BaseVote extends Base
 {
     protected
         $id,
-        $body;
+        $question_id,
+        $ip,
+        $creation_date;
 
     public function isNew()
     {
@@ -16,7 +22,9 @@ abstract class BaseQuestion extends Base
     protected function insert()
     {
         $stmt = $this->connection->insert(self::getSqlName(), array(
-            'body' => $this->body,
+            'question_id' => $this->question_id,
+            'ip' => $this->ip,
+            'creation_date' => date('c'),
         ));
         
         $this->id = $this->connection->lastInsertId();
@@ -27,12 +35,13 @@ abstract class BaseQuestion extends Base
     protected function update()
     {
         return $this->connection->update(self::getSqlName(), array(
-            'body' => $this->body,
+            'question_id' => $this->question_id,
+            'ip' => $this->ip,
         ), array('id' => $this->id));
     }
 
     static public function getSqlName()
     {
-        return 'Question';
+        return 'Vote';
     }
 }
