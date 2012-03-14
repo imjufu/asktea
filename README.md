@@ -4,6 +4,7 @@ Application de dépot et de vote sur questions
 
 ## TODO
 
+* Script MySQL
 * Traduction du formulaire de questions
 	* Qui êtes-vous ?
 	* Votre question ?
