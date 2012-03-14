@@ -17,7 +17,7 @@ class Question implements ControllerProviderInterface
         $controllers = new ControllerCollection();
         
         // *******
-        // **
+        // ** Best questions
         // *******
         $controllers->get('best.html', function() use ($app)
         {
@@ -36,6 +36,8 @@ class Question implements ControllerProviderInterface
         // *******
         $controllers->get('{id}.html', function($id) use ($app)
         {
+            $app['session']->set('menu', null);
+
             $oQuestion  = new Model\Question($app['db']);
             $oComment   = new Model\Comment($app['db']);
 

@@ -1,22 +1,23 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}
-	<h1>{{ question.title }}</h1>
-{% endblock %}
-
 {% block content %}
-	<div>
-		<blockquote>{{ question.author }}</blockquote>
-		<p>{{ question.body }}</p>
-		<p>Nombre de votes : {{ question.nb_vote }}</p>
-		<p><a class="btn btn-primary btn-large" href="{{ path('vote.new', {question_id: question.id}) }}">Voter pour cette question</a></p>
-	</div>
-	<div>
-		{% for comment in comments %}
-			<div class="hero-unit">
-				<p>{{ comment.body }}</p>
-				<blockquote>{{ comment.author }}</blockquote>
-			</div>
-		{% endfor %}
-	</div>
+<div class="row">
+  <div class="span12">
+    <h1>{{ question.title }} <small>{{ question.nb_vote }} {% if question.nb_vote <= 1 %}vote{% else %}votes{% endif %} <a class="btn" href="{{ path('vote.new', {question_id: question.id}) }}"><i class="icon-heart"></i> Voter</a></small></h1>
+    <blockquote>
+      <p>{{ question.body }}</p>
+      <small>par <cite title="">{{ question.author }}</cite>, le {{ question.creation_date|date("d/m/Y") }}</small>
+    </blockquote>
+  </div>
+</div>
+{% for comment in comments %}
+<div class="row">
+  <div class="span12">
+    <blockquote class="well">
+      <p>{{ comment.body }}</p>
+      <small>par <cite title="">{{ comment.author }}</cite>, le {{ comment.creation_date|date("d/m/Y") }}</small>
+    </blockquote>
+  </div>
+</div>
+{% endfor %}
 {% endblock %}

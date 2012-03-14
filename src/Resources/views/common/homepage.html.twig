@@ -1,9 +1,38 @@
 {% extends "layout.html.twig" %}
 
-{% block title %}
-<h1>Liste des questions</h1>
-{% endblock %}
-
 {% block content %}
-  {% include "question/_list.html.twig" with { 'questions': questions } %}
+<div class="page-header">
+  <h1>Hello, world! <small>Une question à poser ? N'hésitez pas.</small></h1>
+</div>
+<div class="row">
+    <div class="span3">
+      <p style="text-align:center;">
+        <img src="{{ app.request.basepath }}/img/logo.png" alt="TEA">
+        <img src="{{ app.request.basepath }}/img/desc.png" alt="The Ebook Alternative">
+      </p>
+    </div>
+    <div class="span9">
+      <table class="table table-striped table-condensed">
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Auteur</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for question in questions %}
+          <tr>
+            <td>{{ question.title }}</td>
+            <td>{{ question.author }}</td>
+            <td>{{ question.creation_date|date("d/m/Y") }}</td>
+            <td><a href="{{ path('question.show', {id: question.id}) }}">Voir »</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <a href="{{ path('question.new') }}" class="btn btn-primary btn-large">Poser une question »</a>
+    </div>
+  </div>
 {% endblock %}

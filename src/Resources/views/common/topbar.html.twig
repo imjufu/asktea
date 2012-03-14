@@ -13,7 +13,7 @@
 
           <li class="{% if app.session.get('menu') == 'homepage' %}active{% endif %}"><a href="{{ path('homepage') }}">Liste des questions</a></li>
           <li class="{% if app.session.get('menu') == 'question.new' %}active{% endif %}"><a href="{{ path('question.new') }}">Poser une nouvelle question</a></li>
-          <li class="{% if app.session.get('menu') == 'question.vote' %}active{% endif %}"><a href="{{ path('question.best') }}">Les questions les plus votées</a></li>
+          <li class="{% if app.session.get('menu') == 'question.best' %}active{% endif %}"><a href="{{ path('question.best') }}">Questions les plus votées</a></li>
         </ul>
         </ul>
       </div><!--/.nav-collapse -->
