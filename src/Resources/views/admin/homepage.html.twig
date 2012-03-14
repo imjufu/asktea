@@ -1,0 +1,101 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Administration</h1>
+</div>
+
+<ul class="nav nav-tabs" id="tab">
+  <li class="active"><a data-toggle="tab" href="#all">Toutes <span class="badge badge-info">{{ questions|length }}</span></a></li>
+  <li><a data-toggle="tab" href="#without-answer">Les non répondues <span class="badge badge-info">{{ questionsNotAnswered|length }}</span></a></li>
+  <li class=""><a data-toggle="tab" href="#with-answer">Les répondues <span class="badge badge-info">{{ questionsAnswered|length }}</span></a></li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+  <div id="all" class="tab-pane fade active in">
+    <table class="table table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>Détail</th>
+          <th>Vote</th>
+          <th>Réponse</th>
+          <th>Date</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for question in questions %}
+        <tr>
+          <td>{{ question.title }}</td>
+          <td>{{ question.body }}</td>
+          <td>{{ question.nb_vote }}</td>
+          <td>
+            {% if question.comments|length > 0 %}
+            <i class="icon-ok"></i>
+            {% else %}
+            <i class="icon-remove"></i>
+            {% endif %}
+          </td>
+          <td>{{ question.creation_date|date("d/m/Y") }}</td>
+          <td><a href="{{ path('question.show', {id: question.id}) }}">Voir »</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div id="without-answer" class="tab-pane fade">
+    <table class="table table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>Détail</th>
+          <th>Vote</th>
+          <th>Date</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for question in questionsNotAnswered %}
+        <tr>
+          <td>{{ question.title }}</td>
+          <td>{{ question.body }}</td>
+          <td>{{ question.nb_vote }}</td>
+          <td>{{ question.creation_date|date("d/m/Y") }}</td>
+          <td><a href="{{ path('question.show', {id: question.id}) }}">Voir »</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div id="with-answer" class="tab-pane fade">
+    <table class="table table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>Détail</th>
+          <th>Vote</th>
+          <th>Date</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for question in questionsAnswered %}
+        <tr>
+          <td>{{ question.title }}</td>
+          <td>{{ question.body }}</td>
+          <td>{{ question.nb_vote }}</td>
+          <td>{{ question.creation_date|date("d/m/Y") }}</td>
+          <td><a href="{{ path('question.show', {id: question.id}) }}">Voir »</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+
+{% block bottomjs %}
+<script src="{{ app.request.basepath }}/js/jquery.min.js"></script>
+<script src="{{ app.request.basepath }}/js/bootstrap-tab.js"></script>
+{% endblock %}

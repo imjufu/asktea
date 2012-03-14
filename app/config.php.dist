@@ -11,3 +11,5 @@ $app['db.options'] = array(
     'path' => __DIR__.'/../cache/asktea.db',
 );
 
+// Secret string
+$app['secret'] = 'change_me_im_not_secret';

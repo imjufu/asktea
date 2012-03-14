@@ -1,0 +1,37 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Administration</h1>
+</div>
+<div class="row">
+  <div class="span6 offset3">
+    {% if app.session.hasFlash('error') %}
+    <div class="alert alert-error"><strong>Erreur!</strong> {{ app.session.getFlash('error') }}</div>
+    {% endif %} 
+    <form method="post" action="{{ url('admin.signin') }}" class="form-horizontal" {{ form_enctype(form) }}>
+      <fieldset>
+        <div class="control-group {% if form.login.vars.errors|length %}error{% endif %}">
+          {{ form_label(form.login, null, { 'attr': { 'class': 'control-label'} }) }}
+          <div class="controls">
+            {{ form_widget(form.login) }}
+            {{ form_errors(form.login) }}
+          </div>
+        </div>
+        <div class="control-group {% if form.password.vars.errors|length %}error{% endif %}">
+          {{ form_label(form.password, null, { 'attr': {'class': 'control-label'} }) }}
+          <div class="controls">
+            {{ form_widget(form.password) }}
+            {{ form_errors(form.password) }}
+          </div>
+        </div>
+        {{ form_rest(form) }}
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Se connecter</button>
+          <button class="btn" type="reset">Annuler</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+{% endblock %}

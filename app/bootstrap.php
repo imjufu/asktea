@@ -12,6 +12,11 @@ $app['autoloader']->registerNamespaces(array(
     'Asktea'  => __DIR__.'/../src/'
 ));
 
+// Utils
+$app['utils'] = $app->share(function() use ($app) {
+    return new \Asktea\Lib\Utils($app);
+});
+
 use Silex\Provider\SymfonyBridgesServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Provider\TwigServiceProvider;
@@ -25,9 +30,7 @@ $app->register(new SymfonyBridgesServiceProvider());
 $app->register(new UrlGeneratorServiceProvider());
 $app->register(new FormServiceProvider());
 $app->register(new ValidatorServiceProvider());
-$app->register(new SessionServiceProvider(), array(
-    'locale' => 'fr',
-));
+$app->register(new SessionServiceProvider());
 $app->register(new DoctrineServiceProvider(), array(
     'db.dbal.class_path'    => __DIR__.'/../vendor/doctrine-dbal/lib',
     'db.common.class_path'  => __DIR__.'/../vendor/doctrine-common/lib',
@@ -44,6 +47,9 @@ $app->register(new TranslationServiceProvider(array(
     'translation.class_path'    => __DIR__.'/../Symfony/Component/Translation',
 )));
 
+// Local
+$app['locale'] = 'fr';
+$app['session.default_locale'] = $app['locale'];
 $app['translator.messages'] = array();
 
 // Load default configuration
@@ -53,7 +59,9 @@ require_once __DIR__.'/config.php.dist';
 if (file_exists(__DIR__.'/config.php')) 
 {
     require_once __DIR__.'/config.php';
-} 
+}
 
+// Start session
+$app['session']->start();
 
 return $app;

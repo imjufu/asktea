@@ -1,0 +1,26 @@
+#!/usr/bin/env php
+<?php
+
+array_shift($argv);
+if (!isset($argv[0])) {
+    exit(<<<EOF
+Admin script management.
+
+Specify a command to run:
+
+new <login> <password>: create an admin account
+
+EOF
+    );
+}
+
+if (!in_array($command = array_shift($argv), array('new'))) {
+    exit(sprintf("Command \"%s\" does not exist.\n", $command));
+}
+
+$app = require_once __DIR__ . '/../app/bootstrap.php';
+
+$oAdmin = new \Asktea\Model\Admin($app['db']);
+$oAdmin->login = $argv[0];
+$oAdmin->password = $app['utils']->hash($argv[1]);
+$oAdmin->save();

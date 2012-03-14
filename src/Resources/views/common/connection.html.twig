@@ -1,0 +1,3 @@
+{% if app.session.has('admin') %}
+<p class="navbar-text pull-right">Bienvenue, <a href="{{ path('admin.homepage') }}">{{ app.session.get('admin').login }}</a> <a href="{{ path('admin.signout') }}"><i class="icon-off icon-white"></i></a></p>
+{% endif %}

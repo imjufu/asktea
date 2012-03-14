@@ -36,3 +36,14 @@ CREATE TABLE IF NOT EXISTS Vote (
 	ip VARCHAR(255) NOT NULL,
 	creation_date DATETIME NOT NULL
 );
+
+-- #######
+-- ##  Admin table
+-- #######
+DROP TABLE IF EXISTS Admin;
+
+CREATE TABLE IF NOT EXISTS Admin (
+  id INTEGER PRIMARY KEY NOT NULL,
+  login VARCHAR(50) NOT NULL,
+  password VARCHAR(50) NOT NULL
+);
