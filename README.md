@@ -17,6 +17,3 @@ Application de dépot et de vote sur questions
 		* Questions répondues
 		* Non répondues
 * Remplacer AskTea par "Une question pour TEA ?"
-* IHM d'admin
-	* Supprimer une question
-
