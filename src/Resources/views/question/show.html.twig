@@ -3,6 +3,9 @@
 {% block content %}
 <div class="row">
   <div class="span12">
+    {% if app.session.hasFlash('success') %}
+    <div class="alert alert-success">{{ app.session.getFlash('success') }}</div>
+    {% endif %} 
     <h1>{{ question.title }} <small>{{ question.nb_vote }} {% if question.nb_vote <= 1 %}vote{% else %}votes{% endif %} <a class="btn" href="{{ path('vote.new', {question_id: question.id}) }}"><i class="icon-heart"></i> Voter</a></small></h1>
     <blockquote>
       <p>{{ question.body }}</p>
@@ -20,4 +23,11 @@
   </div>
 </div>
 {% endfor %}
+{% if app.session.has('admin') %}
+<div class="row">
+  <div class="span6 offset3">
+  {% include 'comment/form.html.twig' with {'form': form, 'question_id': question.id} only %}
+  </div>
+</div>
+{% endif %}
 {% endblock %}

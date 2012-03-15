@@ -1,0 +1,9 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+<div class="row">
+  <div class="span6 offset3">
+    {% include 'comment/form.html.twig' with {'form': form, 'question_id': question_id} only %}
+  </div>
+</div>
+{% endblock %}

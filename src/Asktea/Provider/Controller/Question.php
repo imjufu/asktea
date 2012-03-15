@@ -50,7 +50,13 @@ class Question implements ControllerProviderInterface
 
             $comments = $oComment->getForQuestion($id);
 
-            return $app['twig']->render('question/show.html.twig', array('question' => $question, 'comments' => $comments));
+            $form = $app['form.factory']->create(new Form\CommentType(), array('question_id' => $id));
+
+            return $app['twig']->render('question/show.html.twig', array(
+                'question' => $question, 
+                'comments' => $comments,
+                'form'     => $form->createView(),
+            ));
         })
         ->assert('id', '\d+')
         ->bind('question.show');

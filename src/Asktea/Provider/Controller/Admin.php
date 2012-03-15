@@ -64,7 +64,7 @@ class Admin implements ControllerProviderInterface
         // *******
         // ** Signin
         // *******
-        $controllers->match('/signin', function(Request $request) use ($app)
+        $controllers->match('/signin.html', function(Request $request) use ($app)
         {
             $form = $app['form.factory']->create(new Form\SigninType());
 
@@ -100,7 +100,7 @@ class Admin implements ControllerProviderInterface
         // *******
         // ** Signout
         // *******
-        $controllers->get('/signout', function(Request $request) use ($app)
+        $controllers->get('/signout.html', function(Request $request) use ($app)
         {
             $app['session']->clear();
             $app['session']->invalidate();

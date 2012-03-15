@@ -7,7 +7,8 @@ abstract class BaseComment extends Base
     protected
         $id,
         $author,
-        $body;
+        $body,
+        $question_id;
 
     public function isNew()
     {
@@ -19,6 +20,8 @@ abstract class BaseComment extends Base
         $stmt = $this->connection->insert(self::getSqlName(), array(
             'author' => $this->author,
             'body' => $this->body,
+            'question_id' => $this->question_id,
+            'creation_date' => date('c'),
         ));
         
         $this->id = $this->connection->lastInsertId();
@@ -31,6 +34,7 @@ abstract class BaseComment extends Base
         return $this->connection->update(self::getSqlName(), array(
             'author' => $this->author,
             'body' => $this->body,
+            'question_id' => $this->question_id,
         ), array('id' => $this->id));
     }
 
