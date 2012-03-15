@@ -17,8 +17,6 @@ Application de dépot et de vote sur questions
 		* Toutes
 		* Questions répondues
 		* Non répondues
-* Pied de page
-	* Un problème ? Des questions ? N'hésitez pas à envoyer un mail à contact[at]tea-ebook.com
 * Remplacer AskTea par "Une question pour TEA ?"
 * IHM d'admin
 	* Supprimer une question
