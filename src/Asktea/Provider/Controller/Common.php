@@ -20,6 +20,8 @@ class Common implements ControllerProviderInterface
         // *******
         $controllers->get('/', function(Request $request) use ($app)
         {
+            $app['session']->set('menu', 'homepage');
+
             $oQuestion = new Question($app['db']);
 
             $questions = $oQuestion->findAllWithNbVote();
