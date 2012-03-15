@@ -15,6 +15,14 @@
             {{ form_errors(form.author) }}
           </div>
         </div>
+        <div class="control-group {% if form.contact.vars.errors|length %}error{% endif %}">
+          {{ form_label(form.contact, null, { 'attr': { 'class': 'control-label'} }) }}
+          <div class="controls">
+            {{ form_widget(form.contact) }}
+            {{ form_errors(form.contact) }}
+            <p class="help-block">Il peut s'agir de votre mail, twitter, facebook... Il ne sera pas présenté publiquement.</p>
+          </div>
+        </div>
         <div class="control-group {% if form.title.vars.errors|length %}error{% endif %}">
           {{ form_label(form.title, null, { 'attr': {'class': 'control-label'} }) }}
           <div class="controls">

@@ -23,7 +23,7 @@ class Question extends BaseQuestion
         }
 
         $sql = sprintf("
-        	SELECT q.id, q.author, q.title, q.body, q.creation_date, COUNT(v.id) AS nb_vote
+        	SELECT q.id, q.author, q.contact, q.title, q.body, q.creation_date, COUNT(v.id) AS nb_vote
         	FROM %s AS q
         	LEFT JOIN %s AS v ON q.id = v.question_id
             WHERE q.id = ?
@@ -36,7 +36,7 @@ class Question extends BaseQuestion
 
     public function findAll()
     {
-        $sql = sprintf("SELECT id, author, title, body, creation_date FROM %s ORDER BY creation_date", self::getSqlName());
+        $sql = sprintf("SELECT id, author, contact, title, body, creation_date FROM %s ORDER BY creation_date", self::getSqlName());
         $aData = $this->connection->fetchAll($sql);
         
         $result = array();
@@ -45,6 +45,7 @@ class Question extends BaseQuestion
             $result[$data['id']] = array(
                 'id' => $data['id'],
                 'author' => $data['author'],
+                'contact' => $data['contact'],
                 'title' => $data['title'],
                 'body' => $data['body'],
                 'creation_date' => $data['creation_date'],
@@ -57,7 +58,7 @@ class Question extends BaseQuestion
     public function findAllWithNbVote()
     {
         $sql = sprintf("
-            SELECT q.id, q.author, q.title, q.body, q.creation_date, COUNT(v.id) AS nb_vote
+            SELECT q.id, q.author, q.contact, q.title, q.body, q.creation_date, COUNT(v.id) AS nb_vote
             FROM %s AS q
             LEFT JOIN %s AS v
                 ON q.id = v.question_id
@@ -74,6 +75,7 @@ class Question extends BaseQuestion
             $result[$data['id']] = array(
                 'id' => $data['id'],
                 'author' => $data['author'],
+                'contact' => $data['contact'],
                 'title' => $data['title'],
                 'body' => $data['body'],
                 'creation_date' => $data['creation_date'],
@@ -87,7 +89,7 @@ class Question extends BaseQuestion
     public function findAllOrderedByNbVote()
     {
         $sql = sprintf("
-            SELECT q.id, q.author, q.title, q.body, q.creation_date, COUNT(v.id) AS nb_vote
+            SELECT q.id, q.author, q.contact, q.title, q.body, q.creation_date, COUNT(v.id) AS nb_vote
             FROM %s AS q
             LEFT JOIN %s AS v
                 ON q.id = v.question_id
@@ -104,6 +106,7 @@ class Question extends BaseQuestion
             $result[$data['id']] = array(
                 'id' => $data['id'],
                 'author' => $data['author'],
+                'contact' => $data['contact'],
                 'title' => $data['title'],
                 'body' => $data['body'],
                 'creation_date' => $data['creation_date'],

@@ -18,6 +18,9 @@
         <tr>
           <th>Question</th>
           <th>Détail</th>
+          <th>Autheur</th>
+          <th>Contact</th>
+          <th>Détail</th>
           <th>Vote</th>
           <th>Réponse</th>
           <th>Date</th>
@@ -29,6 +32,8 @@
         <tr>
           <td>{{ question.title }}</td>
           <td>{{ question.body }}</td>
+          <td>{{ question.author }}</td>
+          <td>{{ question.contact }}</td>
           <td>{{ question.nb_vote }}</td>
           <td>
             {% if question.comments|length > 0 %}
@@ -50,6 +55,8 @@
         <tr>
           <th>Question</th>
           <th>Détail</th>
+          <th>Autheur</th>
+          <th>Contact</th>
           <th>Vote</th>
           <th>Date</th>
           <th></th>
@@ -60,6 +67,8 @@
         <tr>
           <td>{{ question.title }}</td>
           <td>{{ question.body }}</td>
+          <td>{{ question.author }}</td>
+          <td>{{ question.contact }}</td>
           <td>{{ question.nb_vote }}</td>
           <td>{{ question.creation_date|date("d/m/Y") }}</td>
           <td><a href="{{ path('question.show', {id: question.id}) }}">Voir »</a></td>
@@ -74,6 +83,8 @@
         <tr>
           <th>Question</th>
           <th>Détail</th>
+          <th>Autheur</th>
+          <th>Contact</th>
           <th>Vote</th>
           <th>Date</th>
           <th></th>
@@ -84,6 +95,8 @@
         <tr>
           <td>{{ question.title }}</td>
           <td>{{ question.body }}</td>
+          <td>{{ question.author }}</td>
+          <td>{{ question.contact }}</td>
           <td>{{ question.nb_vote }}</td>
           <td>{{ question.creation_date|date("d/m/Y") }}</td>
           <td><a href="{{ path('question.show', {id: question.id}) }}">Voir »</a></td>

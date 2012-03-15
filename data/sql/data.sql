@@ -3,9 +3,9 @@
 -- #######
 DELETE FROM Question;
 
-INSERT INTO "Question" VALUES(1,'mrandy', 'Quand pourrons nous acheter ?','Quels sont vos délais de lancement de service ?','2012-03-13');
-INSERT INTO "Question" VALUES(2,'jfusco','Comment acheter ?','Je veux acheter chez vous','2012-03-13');
-INSERT INTO "Question" VALUES(3,'edaspet', 'Est-ce que tout sera open source ?','Est-ce que tout sera open-source ?','2012-03-13');
+INSERT INTO "Question" VALUES(1,'mrandy', '@mrandy', 'Quand pourrons nous acheter ?','Quels sont vos délais de lancement de service ?','2012-03-13');
+INSERT INTO "Question" VALUES(2,'jfusco', 'jfusco@foobar.net', 'Comment acheter ?','Je veux acheter chez vous','2012-03-13');
+INSERT INTO "Question" VALUES(3,'edaspet', null, 'Est-ce que tout sera open source ?','Est-ce que tout sera open-source ?','2012-03-13');
 
 -- #######
 -- ## Comments

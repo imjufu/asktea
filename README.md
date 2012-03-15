@@ -5,7 +5,6 @@ Application de dépot et de vote sur questions
 ## TODO
 
 * Script MySQL
-* Ajout d'un champ contact à Question : email / twitter... facultatif
 * Questions
 	* Mettre en place un pager
 * Voter

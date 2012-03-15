@@ -15,6 +15,7 @@ class QuestionType extends AbstractType
         $builder
             ->add('author', 'text', array('label' => 'Qui êtes-vous ?'))
             ->add('title', 'text', array('label' => 'Votre question ?'))
+            ->add('contact', 'text', array('label' => 'Un contact ?', 'required' => false, 'attr' => array('placeholder' => 'Facultatif.')))
             ->add('body', 'textarea', array('label' => 'Détail'));
     }
 
@@ -29,6 +30,7 @@ class QuestionType extends AbstractType
                 'title' => array(
                     new Constraints\NotNull(),
                     new Constraints\MaxLength(array('limit' => 255))),
+                'contact' => new Constraints\MaxLength(array('limit' => 255)),
                 'body' => array(
                     new Constraints\NotNull(),
                     new Constraints\MaxLength(array('limit' => 255))),
