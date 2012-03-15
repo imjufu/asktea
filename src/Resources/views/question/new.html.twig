@@ -5,7 +5,7 @@
   <h1>Poser une question <small>TEA y répondra</small></h1>
 </div>
 <div class="row">
-  <div class="span6 offset3">
+  <div class="span12">
     <form method="post" action="{{ url('question.new') }}" class="form-horizontal" {{ form_enctype(form) }}>
       <fieldset>
         <div class="control-group {% if form.author.vars.errors|length %}error{% endif %}">
@@ -18,14 +18,14 @@
         <div class="control-group {% if form.title.vars.errors|length %}error{% endif %}">
           {{ form_label(form.title, null, { 'attr': {'class': 'control-label'} }) }}
           <div class="controls">
-            {{ form_widget(form.title) }}
+            {{ form_widget(form.title, {'attr': {'class': 'span8'}}) }}
             {{ form_errors(form.title) }}
           </div>
         </div>
         <div class="control-group {% if form.body.vars.errors|length %}error{% endif %}">
           {{ form_label(form.body, null, { 'attr': {'class': 'control-label'} }) }}
           <div class="controls">
-            {{ form_widget(form.body) }}
+            {{ form_widget(form.body, {'attr': {'class': 'span8'}}) }}
             {{ form_errors(form.body) }}
           </div>
         </div>
@@ -33,6 +33,7 @@
         <div class="form-actions">
           <button class="btn btn-primary" type="submit">Déposer</button>
           <button class="btn" type="reset">Annuler</button>
+          <span class="muted">Nous nous réservons le droit de supprimer une question hors contexte.</span>
         </div>
       </fieldset>
     </form>

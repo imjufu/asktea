@@ -5,12 +5,7 @@ Application de dépot et de vote sur questions
 ## TODO
 
 * Script MySQL
-* Traduction du formulaire de questions
-	* Qui êtes-vous ?
-	* Votre question ?
-	* Détail
 * Ajout d'un champ contact à Question : email / twitter... facultatif
-* Ajout d'une mention en bas du formulaire de question : "Nous nous réservons le droit de supprimer une question hors contexte"
 * Questions
 	* Mettre en place un pager
 * Voter

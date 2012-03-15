@@ -13,9 +13,9 @@ class QuestionType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            ->add('author', 'text')
-            ->add('title', 'text')
-            ->add('body', 'textarea');
+            ->add('author', 'text', array('label' => 'Qui êtes-vous ?'))
+            ->add('title', 'text', array('label' => 'Votre question ?'))
+            ->add('body', 'textarea', array('label' => 'Détail'));
     }
 
     public function getDefaultOptions(array $options)
