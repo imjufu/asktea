@@ -99,6 +99,18 @@ class Question implements ControllerProviderInterface
         ->method('GET|POST')
         ->bind('question.new');
 
+        // *******
+        // ** Question search
+        // *******
+        $controllers->post('search.html', function(Request $request) use ($app)
+        {
+            //TODO
+            die('Not implemented yet.');
+
+            return $app['twig']->render('question/search.html.twig');
+        })
+        ->bind('question.search');
+
         return $controllers;
     }
 }
