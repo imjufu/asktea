@@ -4,6 +4,25 @@ namespace Asktea\Model;
 
 class Question extends BaseQuestion
 {
+    public function delete($id)
+    {
+        $this->connection->beginTransaction();
+        try
+        {
+            $this->connection->delete(Comment::getSqlName(), array('question_id' => $id));
+            $this->connection->delete(self::getSqlName(), array('id' => $id));
+
+            $this->connection->commit();
+        }
+        catch (\Exception $e)
+        {
+            $conn->rollback();
+            return false;
+        }
+
+        return true;
+    }
+
 	public function find($id)
     {
         if( !is_array($id) )

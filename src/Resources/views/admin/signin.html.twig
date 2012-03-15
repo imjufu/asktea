@@ -6,9 +6,6 @@
 </div>
 <div class="row">
   <div class="span6 offset3">
-    {% if app.session.hasFlash('error') %}
-    <div class="alert alert-error"><strong>Erreur!</strong> {{ app.session.getFlash('error') }}</div>
-    {% endif %} 
     <form method="post" action="{{ url('admin.signin') }}" class="form-horizontal" {{ form_enctype(form) }}>
       <fieldset>
         <div class="control-group {% if form.login.vars.errors|length %}error{% endif %}">

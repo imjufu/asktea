@@ -20,7 +20,6 @@
           <th>Détail</th>
           <th>Autheur</th>
           <th>Contact</th>
-          <th>Détail</th>
           <th>Vote</th>
           <th>Réponse</th>
           <th>Date</th>
@@ -43,7 +42,16 @@
             {% endif %}
           </td>
           <td>{{ question.creation_date|date("d/m/Y") }}</td>
-          <td><a href="{{ path('question.show', {id: question.id}) }}">Voir »</a></td>
+          <td>
+            <div class="btn-group">
+              <button class="btn btn-mini"><a href="{{ path('question.show', {id: question.id}) }}">Voir »</a></button>
+              <button data-toggle="dropdown" class="btn btn-mini dropdown-toggle"><span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li><a href="#"><i class="icon-share-alt"></i> Répondre</a></li>
+                <li><a href="{{ path('question.remove', {id: question.id}) }}" onclick="return(confirm('Etes-vous sûr de vouloir supprimer cette question?'));"><i class="icon-trash"></i> Supprimer</a></li>
+              </ul>
+            </div>
+          </td>
         </tr>
       {% endfor %}
       </tbody>
@@ -59,7 +67,7 @@
           <th>Contact</th>
           <th>Vote</th>
           <th>Date</th>
-          <th></th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -87,7 +95,7 @@
           <th>Contact</th>
           <th>Vote</th>
           <th>Date</th>
-          <th></th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -111,4 +119,5 @@
 {% block bottomjs %}
 <script src="{{ app.request.basepath }}/js/jquery.min.js"></script>
 <script src="{{ app.request.basepath }}/js/bootstrap-tab.js"></script>
+<script src="{{ app.request.basepath }}/js/bootstrap-dropdown.js"></script>
 {% endblock %}

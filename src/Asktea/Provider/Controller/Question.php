@@ -112,6 +112,38 @@ class Question implements ControllerProviderInterface
         })
         ->bind('question.search');
 
+        // *******
+        // ** Question delete
+        // *******
+        $controllers->get('remove/{id}.html', function(Request $request, $id) use ($app)
+        {
+            if (!$app['session']->has('admin'))
+            {
+                $app['session']->setFlash('error', 'Vous devez être authentifié pour accéder à cette ressource.');
+                return new RedirectResponse($app['url_generator']->generate('admin.signin'));
+            }
+
+            $oQuestion  = new Model\Question($app['db']);
+            $question = $oQuestion->find($id);
+            
+            if( !$question )
+            {
+                $app->abort(404, 'Cette question n\'existe pas');
+            }
+
+            if ($oQuestion->delete($id))
+            {
+                $app['session']->setFlash('success', 'Suppression effectuée avec succès.');
+            }
+            else
+            {
+                $app['session']->setFlash('error', 'Une erreur est survenue lors de la suppression de cette question.');
+            }
+
+            return $app->redirect($app['url_generator']->generate('admin.homepage'));
+        })
+        ->bind('question.remove');
+
         return $controllers;
     }
 }
