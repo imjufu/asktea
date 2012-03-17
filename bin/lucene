@@ -1,0 +1,45 @@
+#!/usr/bin/env php
+<?php
+
+array_shift($argv);
+if (!isset($argv[0])) {
+    exit(<<<EOF
+Lucene script management.
+
+Specify a command to run:
+
+reindexall: Reindex all question
+optimize: Optimized question index
+
+EOF
+    );
+}
+
+if (!in_array($command = array_shift($argv), array('reindexall', 'optimize'))) {
+    exit(sprintf("Command \"%s\" does not exist.\n", $command));
+}
+
+/**
+ * Reindex All
+ */
+if ($command == 'reindexall')
+{
+	$app = require_once __DIR__ . '/../app/bootstrap.php';
+
+	$index = realpath($app['lucene.index']);
+
+	// Remove Lucene index
+	$rmIndexLucene = shell_exec(sprintf('rm -rf %s', $index));
+
+	// Create Lucene index
+	\Zend\Search\Lucene\Lucene::create($index);
+
+	// Reindex all question
+	$oQuestion = new \Asktea\Model\Question($app['db']);
+	$oLuceneQuestionIndexer = new \Asktea\Lib\LuceneQuestionIndexer($app['lucene']);
+
+	foreach ($oQuestion->findAll() as $id => $question)
+	{
+		$oLuceneQuestionIndexer->update($id, $question['title'], $question['body']);
+	}
+}

@@ -14,7 +14,7 @@
           <li class="{% if app.session.get('menu') == 'question.new' %}active{% endif %}"><a href="{{ path('question.new') }}">Poser une nouvelle question</a></li>
           <li class="{% if app.session.get('menu') == 'question.best' %}active{% endif %}"><a href="{{ path('question.best') }}">Questions les plus votées</a></li>
         </ul>
-        <form method="post" action="{{ path('question.search') }}" class="navbar-search pull-left">
+        <form method="post" action="{{ path('search.go') }}" class="navbar-search pull-left">
           <input type="text" placeholder="Recherche" class="search-query span4" name="search">
         </form>
         {% include "common/connection.html.twig" %}

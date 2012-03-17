@@ -3,6 +3,8 @@
 namespace Asktea\Provider\Controller;
 
 use Asktea\Model;
+use Asktea\Listener;
+use Asktea\Lib;
 use Asktea\Form;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
@@ -79,6 +81,10 @@ class Question implements ControllerProviderInterface
 
                     // Save question into database
                     $oQuestion = new Model\Question($app['db']);
+
+                    // Inject Zend Lucene index
+                    $oQuestion->attach(new Listener\LuceneIndexQuestion(new Lib\LuceneQuestionIndexer($app['lucene'])));
+
                     $oQuestion->author = $data['author'];
                     $oQuestion->contact = $data['contact'];
                     $oQuestion->title = $data['title'];
@@ -99,18 +105,6 @@ class Question implements ControllerProviderInterface
         })
         ->method('GET|POST')
         ->bind('question.new');
-
-        // *******
-        // ** Question search
-        // *******
-        $controllers->post('search.html', function(Request $request) use ($app)
-        {
-            //TODO
-            die('Not implemented yet.');
-
-            return $app['twig']->render('question/search.html.twig');
-        })
-        ->bind('question.search');
 
         // *******
         // ** Question delete

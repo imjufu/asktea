@@ -1,0 +1,27 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Résultats</h1>
+</div>
+<table class="table table-striped table-condensed">
+  <thead>
+    <tr>
+      <th>Question</th>
+      <th>Détail</th>
+      <th>Vote</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for question in questions %}
+    <tr>
+      <td>{{ question.title }}</td>
+      <td>{{ question.body }}</td>
+      <td>{{ question.nb_vote }}</td>
+      <td><a href="{{ path('question.show', {id: question.id}) }}">Voir »</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

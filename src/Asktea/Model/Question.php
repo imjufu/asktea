@@ -4,6 +4,8 @@ namespace Asktea\Model;
 
 class Question extends BaseQuestion
 {
+    protected $observers = array();
+
     public function delete($id)
     {
         $this->connection->beginTransaction();
@@ -74,13 +76,15 @@ class Question extends BaseQuestion
         return $result;
     }
 
-    public function findAllWithNbVote()
+    public function findAllWithNbVote($ids = array())
     {
+        $where = (is_array($ids) && count($ids) > 0) ? sprintf("WHERE q.id IN (%s)", implode(',', $ids)) : '';
+
         $sql = sprintf("
             SELECT q.id, q.author, q.contact, q.title, q.body, q.creation_date, COUNT(v.id) AS nb_vote
             FROM %s AS q
-            LEFT JOIN %s AS v
-                ON q.id = v.question_id
+            LEFT JOIN %s AS v ON q.id = v.question_id
+            $where
             GROUP BY q.id
             ORDER BY q.creation_date",
             self::getSqlName(),
@@ -134,5 +138,27 @@ class Question extends BaseQuestion
         }
         
         return $result;
+    }
+
+    public function save()
+    {
+        $return = parent::save();
+
+        $this->notify();
+
+        return $return;
+    }
+
+    protected function notify() 
+    {
+        foreach($this->observers as $observer) 
+        {
+            $observer->update($this);
+        }
+    }
+
+    public function attach($observer)
+    {
+        $this->observers[] = $observer;
     }
 }
