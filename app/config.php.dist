@@ -13,3 +13,6 @@ $app['db.options'] = array(
 
 // Secret string
 $app['secret'] = 'change_me_im_not_secret';
+
+// Lucene
+$app['lucene.index'] = __DIR__ . '/../cache/asktea.index';

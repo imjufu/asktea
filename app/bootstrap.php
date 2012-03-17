@@ -8,13 +8,21 @@ $app = new Application();
 
 // Autoloading
 $app['autoloader']->registerNamespaces(array(
-    'Symfony' => __DIR__.'/../vendor',
-    'Asktea'  => __DIR__.'/../src/'
+    'Symfony'   => __DIR__.'/../vendor',
+    'Asktea'    => __DIR__.'/../src/',
+    'Zend'      => __DIR__.'/../src/Lib',
 ));
 
 // Utils
 $app['utils'] = $app->share(function() use ($app) {
     return new \Asktea\Lib\Utils($app);
+});
+
+// Lucene
+$app['lucene'] = $app->share(function() use ($app) {
+    return file_exists($index = $app['lucene.index'])
+        ? \Zend\Search\Lucene\Lucene::open($index)
+        : \Zend\Search\Lucene\Lucene::create($index);
 });
 
 use Silex\Provider\SymfonyBridgesServiceProvider;
