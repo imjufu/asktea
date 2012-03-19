@@ -11,14 +11,14 @@ SQLite Database script management.
 
 Specify a command to run:
 
-install <driver>: initialize database (recommended)
-
+install <driver>: initialize database
+load-fixtures <driver> <file>: load fixtures
 
 EOF
     );
 }
 
-if (!in_array($command = array_shift($argv), array('install'))) {
+if (!in_array($command = array_shift($argv), array('install', 'load-fixtures'))) {
     exit(sprintf("Command \"%s\" does not exist.\n", $command));
 }
 
@@ -26,13 +26,31 @@ if (!is_dir($databaseDir)) {
     mkdir($databaseDir, 0777, true);
 }
 
-switch ($argv[0])
+$driver = $argv[0];
+
+if ($command == 'install')
 {
-	case 'sqlite':
-		$db = new SQLite3($databaseDir.'/asktea.db');
-		$db->exec(file_get_contents($rootDir.'/data/sql/schema.sqlite3.sql'));
-		$db->exec(file_get_contents($rootDir.'/data/sql/data.sql'));
-		break;
-	default:
-		exit(sprintf("Driver \"%s\" not supported.\n", $argv[0]));
+	switch ($driver)
+	{
+		case 'sqlite':
+			$db = new SQLite3($databaseDir.'/asktea.db');
+			$db->exec(file_get_contents($rootDir.'/data/sql/schema.sqlite3.sql'));
+			break;
+		default:
+			exit(sprintf("Driver \"%s\" not supported.\n", $driver));
+	}
+}
+elseif ($command == 'load-fixtures')
+{
+	$file = $argv[1];
+
+	switch ($driver)
+	{
+		case 'sqlite':
+			$db = new SQLite3($databaseDir.'/asktea.db');
+			$db->exec(file_get_contents($file));
+			break;
+		default:
+			exit(sprintf("Driver \"%s\" not supported.\n", $argv[0]));
+	}
 }
