@@ -2,6 +2,13 @@
 
 	Application de dépot et de vote sur questions
 
+## INSTALL
+
+	* Vendors : ./bin/vendors update
+	* Database : ./bin/database install
+	* Load fixtures : ./bin/database load-fixtures <file>
+	* Create an admin : ./bin/admin new <login> <password>
+
 ## TODO
 
 	* Wording :
