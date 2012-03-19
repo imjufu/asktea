@@ -13,13 +13,13 @@
 
 <div class="tab-content" id="myTabContent">
   <div id="all" class="tab-pane fade active in">
-    {% include 'question/list.html.twig' with {'questions': questions} %}
+    {% include 'question/list.sof.html.twig' with {'questions': questions} %}
   </div>
   <div id="without-answer" class="tab-pane fade">
-    {% include 'question/list.html.twig' with {'questions': questionsNotAnswered} %}
+    {% include 'question/list.sof.html.twig' with {'questions': questionsNotAnswered} %}
   </div>
   <div id="with-answer" class="tab-pane fade">
-    {% include 'question/list.html.twig' with {'questions': questionsAnswered} %}
+    {% include 'question/list.sof.html.twig' with {'questions': questionsAnswered} %}
   </div>
 </div>
 {% endblock %}
