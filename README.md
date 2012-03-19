@@ -4,7 +4,6 @@
 
 ## TODO
 
-	* Script MySQL
 	* Wording :
 		* Homepage
 			* "Vous avez une question sur TEA ? Sur notre modèle Open-source ? Sur nos solutions techniques ? N'hésitez pas à partager votre question. TEA y répondra."

@@ -11,8 +11,8 @@ SQLite Database script management.
 
 Specify a command to run:
 
-install <driver>: initialize database
-load-fixtures <driver> <file>: load fixtures
+install: initialize database
+load-fixtures <file>: load fixtures
 
 EOF
     );
@@ -26,31 +26,47 @@ if (!is_dir($databaseDir)) {
     mkdir($databaseDir, 0777, true);
 }
 
-$driver = $argv[0];
 
+$app = require_once __DIR__ . '/../app/bootstrap.php';
+
+// Install database
 if ($command == 'install')
 {
+	$driver = $app['db']->getDriver()->getName();
 	switch ($driver)
 	{
-		case 'sqlite':
-			$db = new SQLite3($databaseDir.'/asktea.db');
-			$db->exec(file_get_contents($rootDir.'/data/sql/schema.sqlite3.sql'));
+		case 'pdo_sqlite':
+			$file = __DIR__ . '/../data/sql/schema.sqlite3.sql';
+			break;
+		case 'pdo_mysql':
+			$file = __DIR__ . '/../data/sql/schema.mysql.sql';
 			break;
 		default:
-			exit(sprintf("Driver \"%s\" not supported.\n", $driver));
+			exit(sprintf("Driver \"%s\" is not supported.\n", $driver));
+	}
+
+	$aSQL = explode(';', file_get_contents($file));
+	foreach ($aSQL as $sql) 
+	{
+		$sql = trim($sql);
+		if ($sql)
+		{
+			$app['db']->query($sql);
+		}
 	}
 }
+// Load fixtures
 elseif ($command == 'load-fixtures')
 {
-	$file = $argv[1];
+	$file = $argv[0];
 
-	switch ($driver)
+	$aSQL = explode(';', file_get_contents($file));
+	foreach ($aSQL as $sql) 
 	{
-		case 'sqlite':
-			$db = new SQLite3($databaseDir.'/asktea.db');
-			$db->exec(file_get_contents($file));
-			break;
-		default:
-			exit(sprintf("Driver \"%s\" not supported.\n", $argv[0]));
+		$sql = trim($sql);
+		if ($sql)
+		{
+			$app['db']->query($sql);
+		}
 	}
 }
