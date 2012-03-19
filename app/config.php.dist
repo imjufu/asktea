@@ -6,10 +6,25 @@ $app['debug'] = false;
 $app['session']->set('menu', 'homepage');
 
 // Sqlite
-$app['db.options'] = array(
-    'driver' => 'pdo_sqlite',
-    'path' => __DIR__.'/../cache/asktea.db',
-);
+// $app['db.options'] = array(
+//     'driver' => 'pdo_sqlite',
+//     'path' => __DIR__.'/../cache/asktea.db',
+// );
+// 
+// - OR -
+// 
+// MySQL
+// $app['db.options'] = array(
+//     'driver' 		=> 'pdo_mysql',
+//     'host' 			=> 'localhost',
+//     'user' 			=> 'asktea',
+//     'password' 		=> 'asktea',
+//     'charset'       => 'utf8',
+//    	'driverOptions' => array(
+// 		1002 => 'SET NAMES utf8'
+// 	),
+// );
+
 
 // Secret string
 $app['secret'] = 'change_me_im_not_secret';
