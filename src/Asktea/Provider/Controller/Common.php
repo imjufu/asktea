@@ -2,7 +2,7 @@
 
 namespace Asktea\Provider\Controller;
 
-use Asktea\Model\Question;
+use Asktea\Model;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Silex\ControllerCollection;
@@ -22,9 +22,17 @@ class Common implements ControllerProviderInterface
         {
             $app['session']->set('menu', 'homepage');
 
-            $oQuestion = new Question($app['db']);
-
+            // Load all question
+            $oQuestion = new Model\Question($app['db']);
             $questions = $oQuestion->findAllWithNbVote();
+
+            // Load all response
+            $oComment   = new Model\Comment($app['db']);
+            foreach ($questions as $id => $question)
+            {
+                $questions[$id]['comments'] = $oComment->getForQuestion($question['id']);
+                $questions[$id]['creation_date'] = $app['utils']->ago($question['creation_date']);
+            }
 
             return $app['twig']->render('common/homepage.html.twig', array('questions' => $questions));
         })

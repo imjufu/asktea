@@ -25,9 +25,17 @@ class Question implements ControllerProviderInterface
         {
             $app['session']->set('menu', 'question.best');
 
+            // Load all question
             $oQuestion = new Model\Question($app['db']);
-
             $questions = $oQuestion->findAllOrderedByNbVote();
+
+            // Load all response
+            $oComment   = new Model\Comment($app['db']);
+            foreach ($questions as $id => $question)
+            {
+                $questions[$id]['comments'] = $oComment->getForQuestion($question['id']);
+                $questions[$id]['creation_date'] = $app['utils']->ago($question['creation_date']);
+            }
 
             return $app['twig']->render('question/best.html.twig', array('questions' => $questions));
         })

@@ -1,0 +1,14 @@
+<table class="table table-striped">
+  <tbody>
+    {% for question in questions %}
+    {% set url = path('question.show', {id: question.id}) %}
+    <tr onclick="window.location.href='{{ url }}'" class="pointer">
+      <td class="hcenter"><strong>{{ question.nb_vote }}</strong><br>votes</td>
+      <td class="hcenter"><strong>{{ question.comments|length }}</strong><br>réponses</td>
+      <td>{{ question.title }}<br><span class="muted">{{ question.body }}</span></td>
+      <td class="hcenter vcenter">{{ question.creation_date }}</td>
+      <td class="vcenter"><a href="{{ url }}">Voir »</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

@@ -1,0 +1,9 @@
+.hcenter {
+	text-align: center !important;
+}
+.vcenter {
+	vertical-align: middle !important;
+}
+.pointer {
+	cursor: pointer;
+}

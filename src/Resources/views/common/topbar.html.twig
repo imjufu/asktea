@@ -7,7 +7,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="{{ path('homepage') }}">AskTea</a>
+      <a class="brand" href="{{ path('homepage') }}">
+        <img src="{{ app.request.basepath }}/img/logo.png">
+      </a>
       <div class="nav-collapse">
         <ul class="nav">
           <li class="{% if app.session.get('menu') == 'homepage' %}active{% endif %}"><a href="{{ path('homepage') }}">Liste des questions</a></li>

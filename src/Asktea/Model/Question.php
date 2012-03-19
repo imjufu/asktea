@@ -86,7 +86,7 @@ class Question extends BaseQuestion
             LEFT JOIN %s AS v ON q.id = v.question_id
             $where
             GROUP BY q.id
-            ORDER BY q.creation_date",
+            ORDER BY q.creation_date DESC",
             self::getSqlName(),
             Vote::getSqlName()
         );
