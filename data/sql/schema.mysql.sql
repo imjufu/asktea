@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS `Comment` ;
 CREATE  TABLE IF NOT EXISTS `Comment` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `question_id` INT NOT NULL ,
-  `autor` VARCHAR(255) NOT NULL ,
+  `author` VARCHAR(255) NOT NULL ,
   `body` TEXT NOT NULL ,
   `creation_date` DATETIME NOT NULL ,
   PRIMARY KEY (`id`) ,
