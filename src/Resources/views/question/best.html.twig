@@ -2,7 +2,8 @@
 
 {% block content %}
 <div class="page-header">
-  <h1>Les plus votées <small>Liste des questions populaires</small></h1>
+  <h1>Les plus votées</h1>
+  <div class="extra muted">Liste des questions populaires</div>
 </div>
 {% include 'question/list.sof.html.twig' with {'questions': questions} %}
 {% endblock %}

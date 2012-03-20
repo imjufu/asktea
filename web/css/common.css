@@ -7,3 +7,10 @@
 .pointer {
 	cursor: pointer;
 }
+.brand.tea {
+    padding: 4px 20px 0px !important;
+}
+.page-header .extra {
+	font-size: 16px;
+    padding-top: 7px;
+}
